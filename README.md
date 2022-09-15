@@ -1,6 +1,6 @@
 # ClickerBot For Sunflower Land
 
-Version: 0.4.0
+Version: 0.4.1
 
 ## Requirements
 
@@ -23,9 +23,10 @@ Example:
 java ClickerBotMain 1 60 44
 ```
 
-- recalibrate screen
+- recalibrate screen (default 0)
 - seeds count
 - growth time in second
+- delay between cycles (default 0)
 
 # Donate
 

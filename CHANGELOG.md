@@ -22,3 +22,9 @@ v0.4.0
 - New way to calibrate screen
 - Save calibrate screen config in file
 - Add sound after save mouse location 
+
+v0.4.1
+
+- Add config for additional delay between cycles.
+- Fix display waiting time between cycles.
+- Add const waiting 2 seconds more between cycles.

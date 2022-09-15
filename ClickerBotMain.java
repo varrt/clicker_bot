@@ -8,7 +8,9 @@ public class ClickerBotMain {
 
 		ClickerBotConfig config = new ClickerBotConfig();
 		config.getCycles(scanner, args);
-		config.getDelayBetweenCycles(scanner, args);
+		config.getGrowthTime(scanner, args);
+		config.getDelayBetweenCycles(args);
+
 		config.calibrateScreen(args);
 
 		config.printConfigCommand();
@@ -27,13 +29,16 @@ public class ClickerBotMain {
 
 			long cycleTime = (System.currentTimeMillis() / 1000) - startTime;
 			System.out.println("Cycle finished ("+cycleTime+"s).");
-			if (i < config.cycles - 1 && config.delayBetweenCycles > cycleTime) {
-				int waitingTime = (int) ((config.delayBetweenCycles - cycleTime) * 1000);
+			if (i < config.cycles - 1 && config.growthTime > cycleTime) {
+				int waitingTime = (int) ((config.growthTime - cycleTime));
 				System.out.println("Wait " + waitingTime + " for next cycle.");
-				sleep(waitingTime);
+				sleep((waitingTime + 4) * 1000);
 			}
 		}
 
+		if (config.delayBetweenCycles > 0) {
+			sleep(config.delayBetweenCycles * 1000);
+		}
 		System.out.println("ClickerBot complete.");
 	}
 
@@ -59,8 +64,8 @@ public class ClickerBotMain {
 					clickerBot.config.getTreasureLocation()[1]
 			);
 			clickerBot.click(InputEvent.BUTTON1_DOWN_MASK);
-			sleep(40);
-			move += 1.1;
+			sleep(20);
+			move += 0.9;
 		}
 
 		clickerBot.move(

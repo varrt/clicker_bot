@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class ClickerBotConfig {
 
     public int cycles;
-    public int delayBetweenCycles;
+    public int growthTime;
+
+    public int delayBetweenCycles = 0;
     public int recalibrate = 0;
 
     public String[] locationsX;
@@ -29,14 +31,22 @@ public class ClickerBotConfig {
         cycles = seeds / 22;
     }
 
-    public void getDelayBetweenCycles(Scanner scanner, String[] args) {
-        delayBetweenCycles = 0;
+    public void getGrowthTime(Scanner scanner, String[] args) {
+        growthTime = 0;
         try {
-            delayBetweenCycles = Integer.parseInt(args[1]);
-            System.out.println("Plant time (seconds): " + delayBetweenCycles);
+            growthTime = Integer.parseInt(args[1]);
+            System.out.println("Plant time (seconds): " + growthTime);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             System.out.println("Enter the growth time:");
-            delayBetweenCycles = scanner.nextInt();
+            growthTime = scanner.nextInt();
+        }
+    }
+
+    public void getDelayBetweenCycles(String[] args) {
+        try {
+            delayBetweenCycles = Integer.parseInt(args[3]);
+            System.out.println("Addtional delay between cycles: " + delayBetweenCycles);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignore) {
         }
     }
 
@@ -59,8 +69,8 @@ public class ClickerBotConfig {
 
                 int[] x = new int[14];
                 int[] y = new int[14];
-                for (int i = 0;i < 12; i++) {
-                    System.out.println("Move your cursor to middle of field " + (i+1) + ". (You have 2s)");
+                for (int i = 0; i < 12; i++) {
+                    System.out.println("Move your cursor to middle of field " + (i + 1) + ". (You have 2s)");
                     sleep(2000);
                     x[i] = clickerBot.getX();
                     y[i] = clickerBot.getY();
@@ -94,7 +104,7 @@ public class ClickerBotConfig {
             Scanner scanner = new Scanner(config);
             String firstLine = scanner.nextLine();
             locationsX = firstLine.split(",");
-            String secondLine  = scanner.nextLine();
+            String secondLine = scanner.nextLine();
             locationsY = secondLine.split(",");
             scanner.close();
 
@@ -109,6 +119,7 @@ public class ClickerBotConfig {
         location[1] = Integer.parseInt(locationsY[12]);
         return location;
     }
+
     public int[] getTreasureCloseButtonLocation() {
         int[] location = new int[2];
         location[0] = Integer.parseInt(locationsX[13]);
@@ -126,95 +137,96 @@ public class ClickerBotConfig {
     public int[] getLocation(int field) {
         int[] location = new int[2];
         switch (field) {
-            case 1 -> {
+            case 1:
                 location[0] = Integer.parseInt(locationsX[0]);
                 location[1] = Integer.parseInt(locationsY[0]);
-            }
-            case 2 -> {
+                break;
+            case 2:
                 location[0] = Integer.parseInt(locationsX[4]);
                 location[1] = Integer.parseInt(locationsY[0]);
-            }
-            case 3 -> {
+                break;
+            case 3:
                 location[0] = Integer.parseInt(locationsX[5]);
                 location[1] = Integer.parseInt(locationsY[0]);
-            }
-            case 4 -> {
+                break;
+            case 4:
                 location[0] = Integer.parseInt(locationsX[0]);
                 location[1] = Integer.parseInt(locationsY[1]);
-            }
-            case 5 -> {
+                break;
+            case 5:
                 location[0] = Integer.parseInt(locationsX[4]);
                 location[1] = Integer.parseInt(locationsY[1]);
-            }
-            case 6 -> {
+                break;
+            case 6:
                 location[0] = Integer.parseInt(locationsX[5]);
                 location[1] = Integer.parseInt(locationsY[1]);
-            }
-            case 7 -> {
+                break;
+            case 7:
                 location[0] = Integer.parseInt(locationsX[0]);
                 location[1] = Integer.parseInt(locationsY[2]);
-            }
-            case 8 -> {
+                break;
+            case 8:
                 location[0] = Integer.parseInt(locationsX[4]);
                 location[1] = Integer.parseInt(locationsY[2]);
-            }
-            case 9 -> {
+                break;
+            case 9:
                 location[0] = Integer.parseInt(locationsX[5]);
                 location[1] = Integer.parseInt(locationsY[2]);
-            }
-            case 10 -> {
+                break;
+            case 10:
                 location[0] = Integer.parseInt(locationsX[0]);
                 location[1] = Integer.parseInt(locationsY[3]);
-            }
-            case 11 -> {
+                break;
+            case 11:
                 location[0] = Integer.parseInt(locationsX[4]);
                 location[1] = Integer.parseInt(locationsY[3]);
-            }
-            case 12 -> {
+                break;
+            case 12:
                 location[0] = Integer.parseInt(locationsX[5]);
                 location[1] = Integer.parseInt(locationsY[3]);
-            }
-            case 13 -> {
+                break;
+            case 13:
                 location[0] = Integer.parseInt(locationsX[6]);
                 location[1] = Integer.parseInt(locationsY[6]);
-            }
-            case 14 -> {
+                break;
+            case 14:
                 location[0] = Integer.parseInt(locationsX[8]);
                 location[1] = Integer.parseInt(locationsY[6]);
-            }
-            case 15 -> {
+                break;
+            case 15:
                 location[0] = Integer.parseInt(locationsX[7]);
                 location[1] = Integer.parseInt(locationsY[7]);
-            }
-            case 16 -> {
+                break;
+            case 16:
                 location[0] = Integer.parseInt(locationsX[6]);
                 location[1] = Integer.parseInt(locationsY[8]);
-            }
-            case 17 -> {
+                break;
+            case 17:
                 location[0] = Integer.parseInt(locationsX[8]);
                 location[1] = Integer.parseInt(locationsY[8]);
-            }
-            case 18 -> {
+                break;
+            case 18:
                 location[0] = Integer.parseInt(locationsX[9]);
                 location[1] = Integer.parseInt(locationsY[9]);
-            }
-            case 19 -> {
+                break;
+            case 19:
                 location[0] = Integer.parseInt(locationsX[11]);
                 location[1] = Integer.parseInt(locationsY[9]);
-            }
-            case 20 -> {
+                break;
+            case 20:
                 location[0] = Integer.parseInt(locationsX[10]);
                 location[1] = Integer.parseInt(locationsY[10]);
-            }
-            case 21 -> {
+                break;
+            case 21:
                 location[0] = Integer.parseInt(locationsX[9]);
                 location[1] = Integer.parseInt(locationsY[11]);
-            }
-            case 22 -> {
+                break;
+            case 22:
                 location[0] = Integer.parseInt(locationsX[11]);
                 location[1] = Integer.parseInt(locationsY[11]);
-            }
-            default -> throw new ArrayIndexOutOfBoundsException();
+                break;
+            default:
+                throw new ArrayIndexOutOfBoundsException();
         }
         return location;
     }
@@ -231,16 +243,15 @@ public class ClickerBotConfig {
         System.out.println("Next time you can run application with specific arguments:");
         System.out.println("java ClickerBotMain " +
                 recalibrate + " " +
-                delayBetweenCycles + " " +
-                cycles
+                growthTime + " " +
+                cycles + " " +
+                delayBetweenCycles
         );
     }
 
-    public static String implode(String glue, int[] locations)
-    {
+    public static String implode(String glue, int[] locations) {
         StringBuilder ret = new StringBuilder();
-        for(int i=0;i<locations.length;i++)
-        {
+        for (int i = 0; i < locations.length; i++) {
             ret.append((i == locations.length - 1) ? locations[i] : locations[i] + glue);
         }
         return ret.toString();
